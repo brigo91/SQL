@@ -1,0 +1,1 @@
+SELECT MAX(num_seats) FROM tables;
