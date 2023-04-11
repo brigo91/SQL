@@ -26,6 +26,10 @@ CREATE TABLE organizers (
     user_id INT PRIMARY KEY REFERENCES users ON DELETE CASCADE
 );
 
+CREATE TABLE tags (
+    name VARCHAR(100) PRIMARY KEY
+);
+
 CREATE TABLE events (
     -- id INT PRIMARY KEY AUTO_INCREMENT, -- MySQL
     id SERIAL PRIMARY KEY, -- PostgresSQL
@@ -38,3 +42,15 @@ CREATE TABLE events (
     location_id INT REFERENCES locations ON DELETE CASCADE,
     organizer_id INT REFERENCES organizers ON DELETE CASCADE
 );
+
+CREATE TABLE events_users (
+    event_id INT REFERENCES events ON DELETE CASCADE,
+    user_id INT REFERENCES users ON DELETE CASCADE,
+    PRIMARY KEY (event_id, user_id)
+);
+
+CREATE TABLE events_tags (
+    event_id INT REFERENCES events ON DELETE CASCADE,
+    tag_name VARCHAR(100) REFERENCES tags ON DELETE CASCADE,
+    PRIMARY KEY (event_id, tag_name)
+)
